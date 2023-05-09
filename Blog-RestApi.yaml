@@ -1,0 +1,68 @@
+---
+swagger: "2.0"
+info:
+  version: "Swagger 2.0"
+  title: "http://localhost:8080"
+basePath: ""
+paths:
+  /api/posts:
+    get:
+      operationId: "/api/posts"
+      parameters: []
+      responses:
+        "200": {}
+    post:
+      operationId: "/api/posts"
+      consumes:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Request body"
+        required: true
+      responses:
+        "201": {}
+        "200": {}
+        "400": {}
+        "404": {}
+        "405": {}
+        "500": {}
+        "0": {}
+  /api/posts/{id}:
+    get:
+      operationId: "/api/posts/{id}"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200": {}
+    put:
+      operationId: "/api/posts/{id}"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Request body"
+        required: true
+      responses:
+        "500": {}
+        "400": {}
+        "200": {}
+    delete:
+      operationId: "/api/posts/{id}"
+      consumes:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        "200": {}
