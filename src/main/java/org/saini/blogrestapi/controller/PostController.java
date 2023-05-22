@@ -1,11 +1,13 @@
 package org.saini.blogrestapi.controller;
 
+import jakarta.validation.Valid;
 import org.saini.blogrestapi.payload.PostDto;
 import org.saini.blogrestapi.payload.PostResponse;
 import org.saini.blogrestapi.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,9 +22,9 @@ public class PostController {
     public PostController(PostService postService){
         this.postService=postService;
     }
-
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
       return new ResponseEntity<>(  postService.createPost(postDto), HttpStatus.CREATED);
 
     }
@@ -41,11 +43,12 @@ public class PostController {
     public  ResponseEntity<PostDto> findPostById(@PathVariable(name="id") long id){
         return new  ResponseEntity<>(postService.getPostById(id), HttpStatus.OK);
     }
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/{id}")
     public  ResponseEntity<PostDto> updatePostById(@RequestBody PostDto postDto,@PathVariable(name="id") long id){
         return new  ResponseEntity<>(postService.updatePostById(postDto,id), HttpStatus.OK);
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}")
     public  ResponseEntity<String> deletePostById(@PathVariable(name="id") long id){
 

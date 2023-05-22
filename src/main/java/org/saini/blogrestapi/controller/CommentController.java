@@ -1,6 +1,7 @@
 package org.saini.blogrestapi.controller;
 
 import ch.qos.logback.core.boolex.EvaluationException;
+import jakarta.validation.Valid;
 import org.saini.blogrestapi.payload.CommentDto;
 import org.saini.blogrestapi.service.CommentService;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class CommentController {
     @PostMapping("/posts/{postId}/comments")
     public ResponseEntity<CommentDto> createComment(
             @PathVariable(value = "postId") long postId,
-            @RequestBody CommentDto commentDto
+           @Valid @RequestBody CommentDto commentDto
     ) {
 
         return new ResponseEntity<CommentDto>(commentService.createComment(postId, commentDto), HttpStatus.CREATED);
